@@ -11,21 +11,14 @@ class Item
 
   attr_reader :id, :archived
   attr_accessor :genre, :author, :sources, :label, :publish_date
-  
+
   def can_be_archived?
-    if @publish_date > 10
-      return true
-    else 
-      return false
-    end
+    @publish_date > 10
   end
 
   def move_to_archive
-    if can_be_archived?
-      @archived = true
-    end
+    @archived = true if can_be_archived?
   end
 
   private :can_be_archived?
-  
 end
