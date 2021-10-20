@@ -9,13 +9,5 @@ describe Book do
     it 'Should return the cover state good when we call the cover_state' do
       expect(book1.cover_state).to eq 'good'
     end
-    it 'Should expect false when we call archived' do
-      expect(book1.archived).to eq false
-    end
-    it 'Should expect true when we call archived after change cover state to bad' do
-      book1.cover_state = 'bad'
-      book1.move_to_archive
-      expect(book1.archived).to eq true
-    end
   end
 end

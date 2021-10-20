@@ -1,24 +1,22 @@
 class Item
-  def initialize(date)
+  attr_accessor :genre, :author, :source, :label
+
+  def initialize(publish_date)
     @id = Random.rand(1..1000)
-    @genre = genre
-    @author = author
-    @sources = sources
-    @label = label
-    @publish_date = date
-    @archived = move_to_archive
-  end
-
-  attr_reader :id, :archived
-  attr_accessor :genre, :author, :sources, :label, :publish_date
-
-  def can_be_archived?
-    @publish_date > 10
+    @publish_date = publish_date
+    @archived = false
   end
 
   def move_to_archive
     @archived = can_be_archived?
   end
 
-  private :can_be_archived?
+  private
+
+  def can_be_archived?
+    time = Time.now
+    date_to_compare = Time.new(time.year - 10, time.month, time.day)
+    formatted_date = date_to_compare.strftime('%Y-%m-%d')
+    @publish_date < formatted_date
+  end
 end
