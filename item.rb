@@ -6,7 +6,7 @@ class Item
     @sources = sources
     @label = label
     @publish_date = date
-    @archived = false
+    @archived = move_to_archive
   end
 
   attr_reader :id, :archived
@@ -17,7 +17,7 @@ class Item
   end
 
   def move_to_archive
-    @archived = true if can_be_archived?
+    @archived = can_be_archived?
   end
 
   private :can_be_archived?
