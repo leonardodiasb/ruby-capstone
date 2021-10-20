@@ -2,24 +2,20 @@ require_relative 'book'
 require_relative 'label'
 
 class CreateBook
-  def get_cover_state
+  def cover_state_fn
     print 'How is the Cover State? [(G)ood,(B)ad]: '
     cover_state = gets.chomp
     case cover_state
-    when 'g'
+    when 'G' || 'g'
       'good'
-    when 'G'
-      'good'
-    when 'b'
-      'bad'
-    when 'B'
+    when 'B' || 'b'
       'bad'
     else
       puts "Option is not available, please enter 'G' for Good or 'B' for Bad "
-      get_cover_state
+      cover_state_fn
     end
   end
-  
+
   def choose_label(labels)
     count = 0
     puts 'Select one label from the list:'
@@ -31,8 +27,8 @@ class CreateBook
     puts 'Or create a new Label by hitting the enter key'
     label = gets.chomp
     if label == ''
-      return new_label = create_new_label(labels)
-    elsif label.to_i == 0
+      create_new_label(labels)
+    elsif label.to_i.zero?
       puts ' '
       puts 'Option is not available. Choose a number in the list: '
       choose_label(labels)
@@ -43,7 +39,7 @@ class CreateBook
       choose_label(labels)
     end
   end
-  
+
   def create_new_label(labels)
     puts 'What is the label title? '
     title = gets.chomp
@@ -51,13 +47,13 @@ class CreateBook
     color = gets.chomp
     new_label = Label.new(title: title, color: color)
     labels << new_label
-    return new_label
+    new_label
   end
-  
+
   def create_book(books, labels)
     print 'Who is the Publisher? '
     publisher = gets.chomp
-    cover_state = get_cover_state
+    cover_state = cover_state_fn
     print 'When was the publish date? '
     date = gets.chomp.to_i
     new_label = choose_label(labels)
