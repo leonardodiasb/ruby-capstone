@@ -29,18 +29,10 @@ def create_game()
   game_multiplayer_boolean = true
   game_multiplayer_boolean = false if game_multiplayer.downcase == 'no'
 
-  if @all_labels["#{game_label_title.downcase}_#{game_label_color.downcase}"].nil?
-    @all_labels["#{game_label_title.downcase}_#{game_label_color.downcase}"] =
-      Label.new(game_label_title.downcase,
-                game_label_color.downcase)
-  end
+  @all_labels["#{game_label_title.downcase}_#{game_label_color.downcase}"] = Label.new(game_label_title.downcase, game_label_color.downcase) if @all_labels["#{game_label_title.downcase}_#{game_label_color.downcase}"].nil?
 
   @all_genres[game_genre] = Genre.new(game_genre)
-  if @all_authors["#{author_first_name.downcase}_#{author_last_name.downcase}"].nil?
-    @all_authors["#{author_first_name.downcase}_#{author_last_name.downcase}"] =
-      Author.new(author_first_name.downcase,
-                 author_last_name.downcase)
-  end
+  @all_authors["#{author_first_name.downcase}_#{author_last_name.downcase}"] = Author.new(author_first_name.downcase, author_last_name.downcase) if @all_authors["#{author_first_name.downcase}_#{author_last_name.downcase}"].nil?
   @all_sources[game_source] = Source.new(game_source) if @all_sources[game_source].nil?
 
   new_game = Game.new(game_publish_date, game_multiplayer_boolean, game_last_played_at)
@@ -58,5 +50,5 @@ def create_game()
                    'source_name' => new_game.source.name, 'game_multiplayer' => new_game.multiplayer, 'label_title' => new_game.label.title, 'label_color' => new_game.label.color, 'item_publish_date' => new_game.publish_date,
                    'item_move_to_archive' => new_game.move_to_archive }
   @games.push(game_to_save)
-  puts "\nSuccess!\n"
+  puts "\nSuccess!\n".green
 end

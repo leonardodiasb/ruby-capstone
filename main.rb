@@ -16,7 +16,7 @@ require 'json'
 require 'io/console'
 
 puts
-puts 'Welcome to Catalog App!'
+puts 'This is my catalog app!'
 
 # rubocop:disable Metrics/CyclomaticComplexity
 # rubocop:disable Metrics/MethodLength
