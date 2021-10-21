@@ -1,11 +1,13 @@
 require_relative 'list_books'
 require_relative 'list_labels'
 require_relative 'create_book'
+require_relative 'book_storage'
+require_relative 'label_storage'
 
 class App
   def initialize
-    @books = []
-    @labels = []
+    @books = BookStorage.new.load_books
+    @labels = LabelStorage.new.load_labels(@books)
   end
 
   def run
@@ -24,6 +26,8 @@ class App
       CreateBook.new.create_book(@books, @labels)
       run
     when '4'
+      BookStorage.new.store_books(@books)
+      LabelStorage.new.store_labels(@labels)
       puts 'Thank you for using this app'
     else
       puts 'This option is not available'
