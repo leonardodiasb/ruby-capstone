@@ -58,5 +58,5 @@ def create_game()
                    'source_name' => new_game.source.name, 'game_multiplayer' => new_game.multiplayer, 'label_title' => new_game.label.title, 'label_color' => new_game.label.color, 'item_publish_date' => new_game.publish_date,
                    'item_move_to_archive' => new_game.move_to_archive }
   @games.push(game_to_save)
-  puts "\nSuccess!\n".green
+  puts "\nSuccess!\n"
 end
