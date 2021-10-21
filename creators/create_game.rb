@@ -9,6 +9,10 @@ def create_game()
   print 'Genre: '
   game_genre = gets.chomp.downcase
 
+  # Source
+  print 'Source (e.g. from a friend or online shop): '
+  game_source = gets.chomp.downcase
+
   # Author
   print 'Author - First Name: '
   author_first_name = gets.chomp.downcase
@@ -43,5 +47,5 @@ def create_game()
                    'game_multiplayer' => new_game.multiplayer, 'label_title' => new_game.label.title, 'label_color' => new_game.label.color, 'item_publish_date' => new_game.publish_date,
                    'item_move_to_archive' => new_game.move_to_archive }
   @games.push(game_to_save)
-  puts "\nSuccess!\n".green
+  puts "\nSuccess!\n"
 end
