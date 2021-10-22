@@ -34,6 +34,13 @@ class App
     @genres = GenreStorage.new.load_genres(@albums)
   end
 
+  def continuefunc
+    puts ' '
+    puts 'Press any key to continue...'
+    puts ' '
+    $stdin.gets
+  end
+
   def run
     message = [' ', 'This is the Catalog of my things App', ' ', 'Please choose an option by entering a number:',
                ' 1 - List all books', ' 2 - List all music albums', ' 3 - List all games', ' 4 - List all genres ',
@@ -42,31 +49,49 @@ class App
     option = gets.chomp
     case option
     when '1'
+      puts `clear`
       ListBooks.new.list_books(@books)
+      continuefunc
       run
     when '2'
+      puts `clear`
       ListAlbum.new.list_albums(@albums)
+      continuefunc
       run
     when '3'
+      puts `clear`
       ListGames.new.list_games(@games)
+      continuefunc
       run
     when '4'
+      puts `clear`
       ListGenre.new.list_genre(@genres)
+      continuefunc
       run
     when '5'
+      puts `clear`
       ListLabels.new.list_labels(@labels)
+      continuefunc
       run
     when '6'
+      puts `clear`
       ListAuthors.new.list_authors(@authors)
+      continuefunc
       run
     when '7'
+      puts `clear`
       CreateBook.new.create_book(@books, @labels)
+      continuefunc
       run
     when '8'
+      puts `clear`
       CreateAlbum.new.create_music_album(@albums, @genres)
+      continuefunc
       run
     when '9'
+      puts `clear`
       CreateGame.new.create_game(@games, @authors)
+      continuefunc
       run
     when '10'
       InitializeGames.new.store_games(@games)
@@ -78,6 +103,7 @@ class App
       puts 'Thank you for using this app'
     else
       puts 'This option is not available'
+      continuefunc
       run
     end
   end

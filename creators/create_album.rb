@@ -51,7 +51,7 @@ class CreateAlbum
     on_spotify = on_spotify_fn
     print 'When was the publish date? '
     date = gets.chomp.to_i
-    puts '-------'
+    puts '---------------------'
     new_genre = choose_genre(genres)
     new_music_album = MusicAlbum.new(date, on_spotify: on_spotify, title: title)
     new_genre.add_item(new_music_album)

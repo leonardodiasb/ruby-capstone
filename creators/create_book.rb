@@ -53,6 +53,7 @@ class CreateBook
     cover_state = cover_state_fn
     print 'When was the publish date? '
     date = gets.chomp.to_i
+    puts '---------------------'
     new_label = choose_label(labels)
     new_book = Book.new(date, publisher: publisher, cover_state: cover_state)
     new_label.add_item(new_book)
