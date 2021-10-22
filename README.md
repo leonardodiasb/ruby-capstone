@@ -31,7 +31,7 @@
 1. For testing the classes run:
 
    ```sh
-   rspec spec/class_name.rb
+   rspec specs/class_name.rb
    ```
 
 ## Implementations
