@@ -39,7 +39,7 @@ def main
   initialize_games
   input = ''
 
-  while input.to_i != 13
+  while input.to_i != 10
     puts
     puts 'Please choose an option by entering a number:'
     puts
@@ -86,7 +86,7 @@ def main
       puts 'This option is not available'
     end
     if input.to_i >= 1 && input.to_i <= 8
-      puts 'Press any key to contine...'
+      puts 'Press any key to continue...'
       $stdin.getch
     end
   end

@@ -1,52 +1,63 @@
-def create_book()
-  # Label
-  print 'Label title (e.g. new or gift): '
-  book_label_title = gets.chomp.downcase
-  print 'Label color (e.g. blue or yellow): '
-  book_label_color = gets.chomp.downcase
+class CreateBook
+  def cover_state_fn
+    print 'How is the Cover State? [(G)ood,(B)ad]: '
+    cover_state = gets.chomp
+    case cover_state
+    when 'G' || 'g'
+      'good'
+    when 'B' || 'b'
+      'bad'
+    else
+      puts "Option is not available, please enter 'G' for Good or 'B' for Bad "
+      cover_state_fn
+    end
+  end
 
-  # Genre
-  print 'Genre: '
-  book_genre = gets.chomp.downcase
+  def choose_label(labels)
+    count = 0
+    puts 'Select one label from the list:'
+    labels.each do |e|
+      puts "#{count + 1}) Title: #{e.title}, Color: #{e.color}"
+      count += 1
+    end
+    puts ' '
+    puts 'Or create a new Label by hitting the enter key'
+    label = gets.chomp
+    if label == ''
+      create_new_label(labels)
+    elsif label.to_i.zero?
+      puts ' '
+      puts 'Option is not available. Choose a number in the list: '
+      choose_label(labels)
+    elsif label.to_i <= count
+      labels[label.to_i - 1]
+    else
+      puts 'Option is not available. Choose a number in the list: '
+      choose_label(labels)
+    end
+  end
 
-  # Source
-  print 'Source (e.g. from a friend or online shop): '
-  book_source = gets.chomp.downcase
+  def create_new_label(labels)
+    puts 'What is the label title? '
+    title = gets.chomp
+    puts 'What is the label color? '
+    color = gets.chomp
+    new_label = Label.new(title: title, color: color)
+    labels << new_label
+    new_label
+  end
 
-  # Author
-  print 'Author - First Name: '
-  author_first_name = gets.chomp.downcase
-  print 'Author - Last Name: '
-  author_last_name = gets.chomp.downcase
-
-  # Book Data
-  print 'Publish date (Format: YYYY-MM-DD): '
-  book_publish_date = gets.chomp.downcase
-  print 'Publisher: '
-  book_publisher = gets.chomp.downcase
-  print 'Cover state (e.g. good or bad): '
-  book_cover_state = gets.chomp.downcase
-
-  @all_labels["#{book_label_title.downcase}_#{book_label_color.downcase}"] = Label.new(book_label_title.downcase, book_label_color.downcase) if @all_labels["#{book_label_title.downcase}_#{book_label_color.downcase}"].nil?
-  @all_authors["#{author_first_name.downcase}_#{author_last_name.downcase}"] = Author.new(author_first_name.downcase, author_last_name.downcase) if @all_authors["#{author_first_name.downcase}_#{author_last_name.downcase}"].nil?
-  @all_genres[book_genre] = Genre.new(book_genre)
-  @all_sources[book_source] = Source.new(book_source) if @all_sources[book_source].nil?
-
-  new_book = Book.new(book_publish_date, book_publisher, book_cover_state)
-
-  new_book.genre = @all_genres[book_genre]
-  new_book.author = @all_authors["#{author_first_name.downcase}_#{author_last_name.downcase}"]
-  new_book.source = @all_sources[book_source]
-  new_book.label = @all_labels["#{book_label_title.downcase}_#{book_label_color.downcase}"]
-
-  @all_labels["#{book_label_title.downcase}_#{book_label_color.downcase}"].add_item(new_book)
-  @all_genres[book_genre].add_item(new_book)
-  @all_authors["#{author_first_name.downcase}_#{author_last_name.downcase}"].add_item(new_book)
-  @all_sources[book_source].add_item(new_book)
-
-  book_to_save = { 'json_class' => new_book.class, 'book_publisher' => new_book.publisher, 'book_cover_state' => new_book.cover_state,
-                   'genre_name' => new_book.genre.name, 'author_first_name' => new_book.author.first_name, 'author_last_name' => new_book.author.last_name, 'source_name' => new_book.source.name,
-                   'label_title' => new_book.label.title, 'label_color' => new_book.label.color, 'item_publish_date' => new_book.publish_date, 'item_move_to_archive' => new_book.move_to_archive }
-  @books.push(book_to_save)
-  puts "\nSuccess!\n".green
+  def create_book(books, labels)
+    print 'Who is the Publisher? '
+    publisher = gets.chomp
+    cover_state = cover_state_fn
+    print 'When was the publish date? '
+    date = gets.chomp.to_i
+    new_label = choose_label(labels)
+    new_book = Book.new(date, publisher: publisher, cover_state: cover_state)
+    new_label.add_item(new_book)
+    books << new_book
+    puts ' '
+    puts 'Book created successfully'
+  end
 end

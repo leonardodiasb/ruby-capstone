@@ -1,4 +1,3 @@
-
 def list_genres(all_genres)
   puts
   puts ' GENRES '.center(IO.console.winsize[1], '-').yellow

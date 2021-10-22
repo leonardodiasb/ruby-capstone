@@ -9,10 +9,6 @@ def create_game()
   print 'Genre: '
   game_genre = gets.chomp.downcase
 
-  # Source
-  print 'Source (e.g. from a friend or online shop): '
-  game_source = gets.chomp.downcase
-
   # Author
   print 'Author - First Name: '
   author_first_name = gets.chomp.downcase
