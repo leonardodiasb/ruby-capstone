@@ -8,9 +8,7 @@ require_relative './listings/list_games'
 require_relative './listings/list_authors'
 require_relative './listings/list_albums'
 require_relative './listings/list_genres'
-require_relative './initializers/initialize_books'
 require_relative './initializers/initialize_games'
-require_relative './initializers/initialize_albums'
 require_relative './classes/label'
 require_relative './classes/author'
 require_relative './classes/genre'
@@ -81,7 +79,6 @@ def main
       create_game
     when '10'
       File.write('./data/games.json', JSON.dump(@games))
-      thankyou
     else
       puts 'This option is not available'
     end

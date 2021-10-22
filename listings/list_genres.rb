@@ -1,10 +1,13 @@
-def list_genres(all_genres)
-  puts
-  puts ' GENRES '.center(IO.console.winsize[1], '-').yellow
-  puts 'Not found'.red if all_genres.length.zero?
-  all_genres.each do |_key, value|
-    puts value.name.to_s.capitalize.green
+class ListGenre
+  def list_genre(genre)
+    genre.push(Genre.new(name))
+    if genre.empty?
+      puts 'None'
+      return false
+    end
+    genre.each do |g|
+      puts "Genre: #{g.name}"
+    end
+    puts ''
   end
-  puts '-'.yellow * IO.console.winsize[1]
-  puts
 end

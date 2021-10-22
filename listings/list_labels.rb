@@ -1,10 +1,13 @@
-def list_labels(all_labels)
-  puts
-  puts ' LABELS '.center(IO.console.winsize[1], '-').yellow
-  puts 'Not found'.red if all_labels.length.zero?
-  all_labels.each do |_key, value|
-    puts "#{value.title.to_s.capitalize.green} (#{value.color.to_s.capitalize.green})"
+class ListLabels
+  def list_labels(labels)
+    count = 0
+    if labels.empty?
+      puts 'No labels were found...'
+      return false
+    end
+    labels.each do |e|
+      puts "#{count}) Title: #{e.title}, Color: #{e.color}"
+      count += 1
+    end
   end
-  puts '-'.yellow * IO.console.winsize[1]
-  puts
 end
