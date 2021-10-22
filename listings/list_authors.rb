@@ -1,10 +1,13 @@
-def list_authors(all_authors)
-  puts
-  puts ' AUTHORS '.center(IO.console.winsize[1], '-')
-  puts 'Not found'.red if all_authors.length.zero?
-  all_authors.each do |_key, value|
-    puts "#{value.first_name.capitalize} #{value.last_name.capitalize}"
+class ListAuthors
+  def list_authors(authors)
+    count = 0
+    if authors.empty?
+      puts 'No authors were found...'
+      return false
+    end
+    authors.each do |e|
+      puts "#{count}) First Name: #{e.first_name}, Last Name: #{e.last_name}"
+      count += 1
+    end
   end
-  puts '-' * IO.console.winsize[1]
-  puts
 end

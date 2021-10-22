@@ -1,12 +1,13 @@
 class ListAlbum
   def list_albums(albums)
+    count = 0
     if albums.empty?
       puts 'No albums were found...'
       return false
     end
     albums.each do |a|
-      puts "Album: #{a.title}, Author: #{a.author}, Label: #{a.label}, No of years published: #{a.date}"
+      puts "#{count}) Album: #{a.title}, Is on Spotify: #{a.on_spotify}"
+      count += 1
     end
-    puts ''
   end
 end
