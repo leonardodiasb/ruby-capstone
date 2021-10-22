@@ -1,13 +1,13 @@
 class ListGenre
   def list_genre(genre)
-    genre.push(Genre.new(name))
+    count = 0
     if genre.empty?
-      puts 'None'
+      puts 'No genre were found...'
       return false
     end
-    genre.each do |g|
-      puts "Genre: #{g.name}"
+    genre.each do |e|
+      puts "#{count}) Genre: #{e.name}"
+      count += 1
     end
-    puts ''
   end
 end

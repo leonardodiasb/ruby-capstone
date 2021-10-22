@@ -1,10 +1,10 @@
-require_relative './genre'
-require_relative './item'
+require_relative '../classes/genre'
+require_relative '../classes/item'
 
 describe Genre do
   context 'Check for music genres' do
     it 'can access the genres of music and check item array length' do
-      item = Item.new('action', 'Lee Yin', 'sources', 'label', 8)
+      item = Item.new(8)
       genre = Genre.new('Comedy')
       item.genre = genre
       genre.add_item(item)

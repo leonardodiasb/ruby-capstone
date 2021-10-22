@@ -1,16 +1,25 @@
-def initialize_games()
-  @games.each do |b|
-    @all_labels["#{b['label_title'].downcase}_#{b['label_color'].downcase}"] = Label.new(b['label_title'].downcase, b['label_color'].downcase) if @all_labels["#{b['label_title'].downcase}_#{b['label_color'].downcase}"].nil?
-    @all_authors["#{b['author_first_name']}_#{b['author_last_name']}"] = Author.new(b['author_first_name'], b['author_last_name']) if @all_authors["#{b['author_first_name']}_#{b['author_last_name']}"].nil?
-    @all_genres[b['genre_name']] = Genre.new(b['genre_name']) if @all_genres[b['genre_name']].nil?
-    new_game = Game.new(b['item_publish_date'], b['game_multiplayer'], b['game_last_played_at'])
+class InitializeGames
+  def initialize_games
+    File.open('games.json', 'a')
+    if File.read('games.json') != ''
+      games = JSON.parse(File.read('games.json'))
+      gamescollection = []
+      games.each do |game|
+        gam = Game.new(game['item_publish_date'], game['game_multiplayer'], game['game_last_played_at'])
+        gam.id = game['id']
+        gamescollection << gam
+      end
+      return gamescollection
+    end
+    []
+  end
 
-    new_game.label = @all_labels["#{b['label_title'].downcase}_#{b['label_color'].downcase}"]
-    new_game.author = @all_authors["#{b['author_first_name']}_#{b['author_last_name']}"]
-    new_game.genre = @all_genres[b['genre_name']]
-
-    @all_labels["#{b['label_title'].downcase}_#{b['label_color'].downcase}"].add_item(new_game)
-    @all_authors["#{b['author_first_name']}_#{b['author_last_name']}"].add_item(new_game)
-    @all_genres[b['genre_name']].add_item(new_game)
+  def store_games(games)
+    gamesjs = []
+    games.each do |g|
+      gamesjs << { 'json_class' => g.class, 'game_last_played_at' => g.last_played_at, 'author_first_name' => g.author.first_name, 'author_last_name' => g.author.last_name,
+                   'game_multiplayer' => g.multiplayer, 'item_publish_date' => g.publish_date, 'id' => g.id }
+    end
+    File.write('games.json', JSON.generate(gamesjs))
   end
 end
