@@ -1,6 +1,3 @@
-require_relative 'book'
-require_relative 'label'
-
 class CreateBook
   def cover_state_fn
     print 'How is the Cover State? [(G)ood,(B)ad]: '

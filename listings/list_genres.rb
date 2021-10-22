@@ -1,4 +1,3 @@
-require_relative './genre'
 class ListGenre
   def list_genre(genre)
     genre.push(Genre.new(name))
