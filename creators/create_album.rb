@@ -53,7 +53,7 @@ class CreateAlbum
     date = gets.chomp.to_i
     puts '-------'
     new_genre = choose_genre(genres)
-    new_music_album = MusicAlbum.new(date, on_spotify: on_spotify , title: title)
+    new_music_album = MusicAlbum.new(date, on_spotify: on_spotify, title: title)
     new_genre.add_item(new_music_album)
     music_albums << new_music_album
     puts ' '

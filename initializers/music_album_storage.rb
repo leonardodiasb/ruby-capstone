@@ -20,7 +20,7 @@ class MusicAlbumStorage
     music_albumsjs = []
     music_albums.each do |e|
       music_albumsjs << { 'on_spotify' => e.on_spotify, 'title' => e.title, 'publish_date' => e.publish_date,
-                   'id' => e.id }
+                          'id' => e.id }
     end
     File.write('music_albums.json', JSON.generate(music_albumsjs))
   end
