@@ -8,6 +8,7 @@ describe Genre do
       album = MusicAlbum.new(24, title: 'Test', on_spotify: true)
       genre.add_item(album)
       expect(genre.items.empty?).to eq(false)
+      expect(album.genre.name == 'Comedy').to be(true)
     end
   end
 end
