@@ -1,8 +1,8 @@
 class MusicAlbum < Item
   attr_accessor :on_spotify, :title
 
-  def initialize(publish_date, title:, on_spotify: true)
-    super(publish_date)
+  def initialize(*args, title:, on_spotify: true)
+    super(*args)
     @on_spotify = on_spotify
     @title = title
   end
