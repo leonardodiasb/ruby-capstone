@@ -35,9 +35,9 @@ class App
   end
 
   def continuefunc
-    puts ' '
+    puts '  '
     puts 'Press any key to continue...'
-    puts ' '
+    puts '  '
     $stdin.gets
   end
 

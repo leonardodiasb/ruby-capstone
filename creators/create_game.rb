@@ -44,7 +44,7 @@ class CreateGame
     game_multiplayer_boolean = true
     game_multiplayer_boolean = false if game_multiplayer.downcase == 'no'
 
-    puts '---------------------'
+    puts '----------------------'
     new_author = choose_author(authors)
     new_game = Game.new(game_publish_date, game_multiplayer_boolean, game_last_played_at)
     new_author.add_item(new_game)
